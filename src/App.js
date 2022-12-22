@@ -1,9 +1,10 @@
 import React from 'react'
 
 import Home from './routes/Home'
+import ProductList from './routes/ProductList'
 
 const App = () => {
-    return <Home />
+    return <ProductList />
 }
 
 export default App
