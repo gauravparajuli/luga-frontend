@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-const Layout = ({ children }) => {
+const Layout = ({ title, children }) => {
+    useEffect(() => {
+        document.title = title
+            ? `${title} - Luga Clothing Store`
+            : 'Luga Clothing Store'
+    }, [])
     return (
         <>
             <Navbar />

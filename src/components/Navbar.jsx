@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { FiShoppingCart, FiHeart, FiSearch } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 import Annoucement from './Announcement'
 
@@ -9,9 +10,11 @@ const Navbar = () => {
         <>
             <Annoucement />
             <nav className='container py-2 mx-auto'>
-                <div className='flex flex-col md:flex-row md:justify-between'>
+                <div className='flex flex-col items-center gap-2 md:flex-row md:justify-between'>
                     <div className='text-center'>
-                        <h1 className='text-4xl'>LUGA</h1>
+                        <Link to='/'>
+                            <h1>LUGA</h1>
+                        </Link>
                     </div>
                     <div className='flex items-center justify-between'>
                         <div className='flex items-center border py-2  px-3 rounded-full'>
@@ -25,9 +28,9 @@ const Navbar = () => {
                     </div>
 
                     <div className='flex space-x-4 items-center'>
-                        <a href='#'>HOME</a>
-                        <a href='#'>SHOP</a>
-                        <a href='#'>SIGN IN</a>
+                        <Link to='/'>HOME</Link>
+                        <Link to='/shop'>SHOP</Link>
+                        <Link to='/auth'>SIGN IN</Link>
                         <FiHeart className='h-6 w-6' />
                         <FiShoppingCart className='h-6 w-6' />
                     </div>
