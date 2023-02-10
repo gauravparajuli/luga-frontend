@@ -9,7 +9,7 @@ const Navbar = () => {
     return (
         <>
             <Annoucement />
-            <nav className='container py-2 mx-auto'>
+            <nav className='sticky top-0 container py-2 mx-auto bg-white z-10'>
                 <div className='flex flex-col items-center gap-2 md:flex-row md:justify-between'>
                     <div className='text-center'>
                         <CLink underline={false} to='/'>

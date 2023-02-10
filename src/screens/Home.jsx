@@ -12,7 +12,8 @@ const Home = () => {
             <Layout>
                 <Hero sliderData={sliderItems} />
                 <Categories />
-                {/* <Products /> */}
+                <h1 className='mb-2 mt-8'>Popular Products</h1>
+                <Products />
             </Layout>
         </>
     )

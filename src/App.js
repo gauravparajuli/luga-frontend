@@ -11,6 +11,8 @@ const App = () => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/product/:id' element={<Product />} />
+            <Route path='/shop' element={<ProductList />} />
             <Route path='/pay' element={<Pay />} />
             <Route path='/success' element={<PaymentSuccessful />} />
         </Routes>
