@@ -6,7 +6,7 @@ import { popularProducts } from '../data'
 
 const Products = () => {
     return (
-        <div className='container mx-auto flex flex-wrap space-x-5'>
+        <div className='container mx-auto flex flex-wrap space-x-5 '>
             {popularProducts.map((product) => (
                 <ProductItem product={product} key={product.id} />
             ))}

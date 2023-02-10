@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaSearch } from 'react-icons/fa'
 
 import { FiShoppingCart, FiHeart, FiSearch } from 'react-icons/fi'
 
