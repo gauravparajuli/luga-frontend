@@ -27,3 +27,9 @@
         @apply text-sm;
     }
 }
+
+@layer components {
+    .link {
+        @apply hover:underline underline-offset-4;
+    }
+}

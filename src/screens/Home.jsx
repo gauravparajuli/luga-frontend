@@ -1,17 +1,18 @@
 import React from 'react'
 
-import Slider from '../components/Slider'
+import Hero from '../components/Hero'
 import Categories from '../components/Categories'
 import Products from '../components/Products'
 import Layout from '../components/Layout'
+import { sliderItems } from '../data'
 
 const Home = () => {
     return (
         <>
             <Layout>
-                <Slider />
-                <Categories />
-                <Products />
+                <Hero sliderData={sliderItems} />
+                {/* <Categories />
+                <Products /> */}
             </Layout>
         </>
     )
