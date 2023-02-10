@@ -7,12 +7,14 @@ import Pay from './screens/Pay'
 import PaymentSuccessful from './screens/PaymentSuccessful'
 import Product from './screens/Product'
 import Login from './screens/Login'
+import Signup from './screens/Signup'
 
 const App = () => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
             <Route path='/product/:id' element={<Product />} />
             <Route path='/shop' element={<ProductList />} />
             <Route path='/pay' element={<Pay />} />
