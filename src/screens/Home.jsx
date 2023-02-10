@@ -11,8 +11,8 @@ const Home = () => {
         <>
             <Layout>
                 <Hero sliderData={sliderItems} />
-                {/* <Categories />
-                <Products /> */}
+                <Categories />
+                {/* <Products /> */}
             </Layout>
         </>
     )

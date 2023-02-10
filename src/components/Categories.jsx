@@ -6,11 +6,14 @@ import { categories } from '../data'
 
 const Categories = () => {
     return (
-        <div className='container mx-auto flex h-[450px] justify-between space-x-5'>
-            {categories.map((category) => (
-                <CategoryItem category={category} key={category.id} />
-            ))}
-        </div>
+        <>
+            <h1 className='mb-2 mt-8'>Categories</h1>
+            <div className='flex flex-col lg:flex-row justify-between gap-4'>
+                {categories.map((category) => (
+                    <CategoryItem category={category} key={category.id} />
+                ))}
+            </div>
+        </>
     )
 }
 
