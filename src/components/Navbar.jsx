@@ -30,7 +30,7 @@ const Navbar = () => {
                     <div className='flex space-x-4 items-center'>
                         <CLink to='/'>HOME</CLink>
                         <CLink to='/shop'>SHOP</CLink>
-                        <CLink to='/auth'>SIGN IN</CLink>
+                        <CLink to='/login'>SIGN IN</CLink>
                         <FiShoppingCart className='h-6 w-6 cursor-pointer' />
                     </div>
                 </div>

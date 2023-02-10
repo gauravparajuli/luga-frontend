@@ -1,9 +1,10 @@
 import React from 'react'
 import Layout from '../components/Layout'
-
+import { useParams } from 'react-router-dom'
 import Button from '../components/Button'
 
 const Product = () => {
+    const { productId } = useParams()
     return (
         <>
             <Layout>
