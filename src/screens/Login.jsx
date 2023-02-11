@@ -29,6 +29,9 @@ const Login = () => {
                         <li>
                             <CLink to='/signup'>Create new account</CLink>
                         </li>
+                        <li>
+                            <CLink to='/'>{'<<'} Home</CLink>
+                        </li>
                     </ul>
                     <Button>Login</Button>
                 </div>

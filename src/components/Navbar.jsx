@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { FiShoppingCart, FiSearch } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 import CLink from './CLink'
 
 import Annoucement from './Announcement'
@@ -31,7 +32,9 @@ const Navbar = () => {
                         <CLink to='/'>HOME</CLink>
                         <CLink to='/shop'>SHOP</CLink>
                         <CLink to='/login'>SIGN IN</CLink>
-                        <FiShoppingCart className='h-6 w-6 cursor-pointer' />
+                        <Link to='/cart'>
+                            <FiShoppingCart className='h-6 w-6 cursor-pointer' />
+                        </Link>
                     </div>
                 </div>
             </nav>

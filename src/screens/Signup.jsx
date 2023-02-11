@@ -5,7 +5,7 @@ import CLink from '../components/CLink'
 
 const Signup = () => {
     useEffect(() => {
-        document.title = 'Login'
+        document.title = 'Signup'
     }, [])
 
     return (
@@ -15,7 +15,7 @@ const Signup = () => {
             }}
             className='h-[100vh] bg-cover flex items-center justify-center'
         >
-            <div className='flex flex-col bg-white'>
+            <div className='flex flex-col bg-white '>
                 <div className='flex flex-col items-center justify-center bg-white text-lg p-4 gap-4'>
                     <h1 className='text-center'>SIGNUP</h1>
                     <TextBox placeholder='Username' type='text' />
@@ -24,6 +24,11 @@ const Signup = () => {
                     <TextBox placeholder='Confirm Password' type='password' />
                 </div>
                 <div className='p-4 flex flex-col'>
+                    <ul className='mb-2'>
+                        <li>
+                            <CLink to='/'>{'<<'} Home</CLink>
+                        </li>
+                    </ul>
                     <Button>Signup</Button>
                 </div>
             </div>
