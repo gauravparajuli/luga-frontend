@@ -22,8 +22,11 @@ const ProductItem = ({ product }) => {
     return (
         <div className='flex flex-col'>
             <div className=' bg-gray-200 h-[350px] w-[100vw] lg:w-[30vw] cursor-pointer hover:bg-gray-700/30 transition-colors'>
-                <Link to={`/product/${product._id}`}>
-                    <img src={product.imageUrl} className='h-[80%]' />
+                <Link
+                    to={`/product/${product._id}`}
+                    className=' flex items-center justify-center h-full'
+                >
+                    <img src={product.imageUrl} className='h-[80%] ' />
                 </Link>
             </div>
             <Button onClick={() => addProductToCart(product)}>
