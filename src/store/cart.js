@@ -29,10 +29,15 @@ export const cartSlice = createSlice({
             const index = state.products.findIndex(
                 (item) => item._id === payload.id
             )
-            if (index > -1) {
+            if (index > -1 && state.products[index].quantity > 1) {
                 state.totalQty -= 1
                 state.totalPrice -= state.products[index].price
                 state.products[index].quantity -= 1
+            } else {
+                // product count has reached 0, remove the product
+                const removed = state.products.splice(index, 1)[0] // because splice returns an array of deleted elements
+                state.totalQty -= removed.quantity
+                state.totalPrice -= removed.quantity * removed.price
             }
         },
 
@@ -41,7 +46,9 @@ export const cartSlice = createSlice({
                 (item) => item._id === payload.id
             )
             if (index > -1) {
-                state.products.pop(index)
+                const removed = state.products.splice(index, 1)[0] // because splice returns an array of deleted elements
+                state.totalQty -= removed.quantity
+                state.totalPrice -= removed.quantity * removed.price
             }
         },
     },
