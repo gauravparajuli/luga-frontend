@@ -14,20 +14,23 @@ const App = () => {
     const user = true
     return (
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route index element={<Home />} />
             <Route
-                path='/login'
+                path='login'
                 element={user ? <Navigate to='/' /> : <Login />}
             />
-            <Route path='/cart' element={<Cart />} />
+            <Route path='cart' element={<Cart />} />
             <Route
-                path='/signup'
+                path='signup'
                 element={user ? <Navigate to='/' /> : <Signup />}
             />
-            <Route path='/product/:id' element={<Product />} />
-            <Route path='/products/:category' element={<ProductList />} />
-            <Route path='/pay' element={<Pay />} />
-            <Route path='/success' element={<PaymentSuccessful />} />
+            <Route path='product/:id' element={<Product />} />
+            <Route path='products'>
+                <Route index element={<ProductList />} />
+                <Route path=':category' element={<ProductList />} />
+            </Route>
+            <Route path='pay' element={<Pay />} />
+            <Route path='success' element={<PaymentSuccessful />} />
         </Routes>
     )
 }

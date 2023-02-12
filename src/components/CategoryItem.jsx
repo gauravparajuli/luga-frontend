@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const CategoryItem = ({ category }) => {
     const { img, title, cat } = category
-    console.log(`/products/${cat}`)
+    // console.log(`/products/${cat}`)
     return (
         <div className='relative group cursor-pointer h-[400px] w-[100vw]'>
             <Link to={`/products/${cat}`}>
