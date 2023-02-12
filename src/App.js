@@ -24,7 +24,7 @@ const App = () => {
                 path='signup'
                 element={user ? <Navigate to='/' /> : <Signup />}
             />
-            <Route path='product/:id' element={<Product />} />
+            <Route path='product/:productId' element={<Product />} />
             <Route path='products'>
                 <Route index element={<ProductList />} />
                 <Route path=':category' element={<ProductList />} />

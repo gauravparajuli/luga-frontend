@@ -4,8 +4,6 @@ import axios from 'axios'
 
 import ProductItem from './ProductItem'
 
-import { popularProducts } from '../data'
-
 const Products = ({ category, color, sort }) => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])

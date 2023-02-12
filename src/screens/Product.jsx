@@ -1,39 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useParams } from 'react-router-dom'
 import Button from '../components/Button'
+import axios from 'axios'
+
+import { publicRequest } from '../request-methods'
 
 const Product = () => {
     const { productId } = useParams()
+
+    console.log(productId)
+
+    const [product, setProduct] = useState({})
+
+    useEffect(() => {
+        const getProduct = async () => {
+            // const response = await publicRequest.get(`product/${productId}/`)
+            try {
+                // const response = await axios.get(
+                //     `https://luga-backend.vercel.app/api/v1/product/${productId}`
+                // )
+                const response = await publicRequest(`product/${productId}`)
+                if ((response.status = 200)) {
+                    setProduct(response.data)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getProduct()
+        console.log(product)
+    }, [])
+
     return (
         <>
             <Layout>
-                <h1 className='mb-2 mt-8 text-center'>Denim Jeans</h1>
-                <div className='flex flex-col md:flex-row justify-between'>
-                    {/* image container */}
-                    <div>
-                        <img
-                            src='https://i.ibb.co/S6qMxwr/jean.jpg'
-                            className='h-[90%]'
-                            alt=''
-                        />
-                    </div>
-                    {/* product info container  */}
-                    <div className='flex flex-col gap-4 text-lg'>
-                        <p className='text-lg'>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Donec venenatis, dolor in finibus malesuada,
-                            lectus ipsum porta nunc, at iaculis arcu nisi sed
-                            mauris. Nulla fermentum vestibulum ex, eget
-                            tristique tortor pretium ut. Curabitur elit justo,
-                            consequat id condimentum ac, volutpat ornare.
-                        </p>
-                        <p className='font-bold'>$ 20</p>
-                        <div className='md:w-[200px] my-4'>
-                            <Button>ADD TO CART</Button>
+                {product && (
+                    <>
+                        <h1 className='mb-2 mt-8 text-center'>
+                            {product.title}
+                        </h1>
+                        <div className='flex flex-col md:flex-row'>
+                            {/* image container */}
+                            <div className='md:w-[60vw]'>
+                                <img
+                                    src={product.imageUrl}
+                                    className='h-[80vh]'
+                                    alt=''
+                                />
+                            </div>
+                            {/* product info container  */}
+                            <div className='flex flex-col gap-4 text-lg justify-center'>
+                                <ul>
+                                    <li>Description: {product.description}</li>
+                                    <li>
+                                        Color:{' '}
+                                        <span className='uppercase'>
+                                            {product.color}
+                                        </span>
+                                    </li>
+                                    <li>
+                                        Size:{' '}
+                                        <span className='uppercase'>
+                                            {product.size}
+                                        </span>
+                                    </li>
+                                    <li>Price: ${product.price}</li>
+                                </ul>
+                                <div className='md:w-[200px] my-4'>
+                                    <Button>ADD TO CART</Button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </Layout>
         </>
     )

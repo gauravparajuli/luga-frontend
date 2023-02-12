@@ -13,7 +13,9 @@ const ProductList = () => {
     return (
         <Layout title='Products'>
             <h1 className='mb-2 mt-8 text-center'>
-                Products{category && ` (${category.toUpperCase()})`}
+                {category
+                    ? `${category.charAt(0).toUpperCase()}${category.slice(1)}`
+                    : 'Products'}
             </h1>
 
             <div className='flex justify-between mb-4'>
