@@ -12,7 +12,9 @@ const Layout = ({ title, children }) => {
     return (
         <>
             <Navbar />
-            <section className='container mx-auto'>{children}</section>
+            <section className='container mx-auto min-h-screen'>
+                {children}
+            </section>
             <Footer />
         </>
     )

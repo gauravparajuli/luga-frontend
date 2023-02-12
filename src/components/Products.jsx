@@ -6,7 +6,7 @@ import ProductItem from './ProductItem'
 
 import { popularProducts } from '../data'
 
-const Products = ({ category, filters, sort }) => {
+const Products = ({ category, color, sort }) => {
     const [products, setProducts] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([])
 
@@ -27,16 +27,10 @@ const Products = ({ category, filters, sort }) => {
         getProducts()
     }, [category])
 
-    // useEffect(() => {
-    //     // category &&
-    //     setFilteredProducts(
-    //         products.filter((item) =>
-    //             Object.entries(filters).every(([key, value]) =>
-    //                 item[key].includes(value)
-    //             )
-    //         )
-    //     )
-    // }, [products, category, filters])
+    useEffect(() => {
+        // category &&
+        setFilteredProducts(products.filter((item) => item.color === color))
+    }, [color])
 
     useEffect(() => {
         if (sort === 'newest') {
