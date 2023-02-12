@@ -62,7 +62,11 @@ const ProductList = () => {
                     </select>
                 </div>
             </div>
-            <Products category={category} filters={filters} sort={sort} />
+            <Products
+                category={category ? category : ''}
+                filters={filters}
+                sort={sort}
+            />
         </Layout>
     )
 }

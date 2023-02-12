@@ -9,7 +9,7 @@ const Hero = ({ sliderData }) => {
                     return (
                         <div
                             key={id}
-                            className={`flex items-center bg-[${bg}] h-[90vh] w-full justify-center`}
+                            className={`flex items-center bg-[#fcf1ed] h-[90vh] w-full justify-center`}
                         >
                             {/* image */}
                             <div className='hidden md:block'>

@@ -18,8 +18,8 @@ const Products = ({ category, filters, sort }) => {
                         ? `https://luga-backend.vercel.app/api/v1/product?category=${category}`
                         : `https://luga-backend.vercel.app/api/v1/product`
                 )
-                console.log(result)
                 setProducts(result.data)
+                setFilteredProducts(result.data)
             } catch (error) {
                 console.log(error)
             }
@@ -38,10 +38,28 @@ const Products = ({ category, filters, sort }) => {
     //     )
     // }, [products, category, filters])
 
+    useEffect(() => {
+        if (sort === 'newest') {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.createadAt - b.createadAt)
+            )
+        }
+        if (sort === 'asc') {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.price - b.price)
+            )
+        }
+        if (sort === 'desc') {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => b.price - a.price)
+            )
+        }
+    }, [sort])
+
     return (
         <>
             <div className='flex flex-col md:flex-row md:flex-wrap gap-4 mb-4'>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <ProductItem product={product} key={product.id} />
                 ))}
             </div>
