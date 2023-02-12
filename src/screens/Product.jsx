@@ -9,8 +9,6 @@ import { publicRequest } from '../request-methods'
 const Product = () => {
     const { productId } = useParams()
 
-    console.log(productId)
-
     const [product, setProduct] = useState({})
 
     useEffect(() => {
@@ -30,7 +28,6 @@ const Product = () => {
         }
 
         getProduct()
-        console.log(product)
     }, [])
 
     return (
