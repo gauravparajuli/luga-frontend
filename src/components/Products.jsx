@@ -52,7 +52,7 @@ const Products = ({ category, color, sort }) => {
         <>
             <div className='flex flex-col md:flex-row md:flex-wrap gap-4 mb-4'>
                 {filteredProducts.map((product) => (
-                    <ProductItem product={product} key={product.id} />
+                    <ProductItem product={product} key={product._id} />
                 ))}
             </div>
         </>

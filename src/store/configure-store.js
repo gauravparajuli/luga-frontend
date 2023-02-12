@@ -5,6 +5,7 @@ import cartReducer from './cart'
 const store = configureStore({
     reducer: {
         cart: cartReducer,
+        devTools: true,
     },
 })
 
