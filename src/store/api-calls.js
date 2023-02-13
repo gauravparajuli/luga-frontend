@@ -1,5 +1,15 @@
 import { loginFailure, loginStart, loginSuccess } from './user'
-import { persistCartStart, persistCartSuccess, persistCartError } from './cart'
+import {
+    persistCartStart,
+    persistCartSuccess,
+    persistCartError,
+    resetCart,
+} from './cart'
+import {
+    processOrderStart,
+    processOrderSuccess,
+    processOrderFailure,
+} from './order'
 import { publicRequest, userRequest } from '../request-methods'
 
 export const loginUser = async (dispatch, user) => {
@@ -12,7 +22,7 @@ export const loginUser = async (dispatch, user) => {
     }
 }
 
-export const persistCart = async (dispatch, user, cart) => {
+const persistCart = async (dispatch, user, cart) => {
     dispatch(persistCartStart())
     const processedCart = cart.products.map((item) => ({
         productId: item._id,
@@ -27,5 +37,20 @@ export const persistCart = async (dispatch, user, cart) => {
     } catch (error) {
         console.log(error)
         dispatch(persistCartError())
+    }
+}
+
+export const processOrder = async (dispatch, user, cart, order) => {
+    // before processing order, persist the order to database first
+    persistCart(dispatch, user, cart)
+
+    dispatch(processOrderStart())
+    try {
+        const response = await userRequest(user).post('checkout/payment', order)
+        if (response.status === 200) dispatch(processOrderSuccess())
+        dispatch(resetCart())
+    } catch (error) {
+        console.log(error)
+        dispatch(processOrderFailure())
     }
 }

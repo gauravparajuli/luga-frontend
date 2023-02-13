@@ -28,6 +28,7 @@ const App = () => {
                 path='login'
                 element={user ? <Navigate to='/' /> : <Login />}
             />
+            <Route path='success' element={<PaymentSuccessful />} />
             <Route path='logout' element={<Logout />} />
             <Route path='cart' element={<Cart />} />
             <Route

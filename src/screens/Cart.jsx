@@ -1,22 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import CartItem from '../components/CartItem'
-import Button from '../components/Button'
 import CLink from '../components/CLink'
+import StripeCheckout from 'react-stripe-checkout'
+import Button from '../components/Button'
+import { Navigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { persistCart } from '../store/api-calls'
+import { processOrder } from '../store/api-calls'
 
 const Cart = () => {
     const { cart, user } = useSelector((state) => state)
 
     const dispatch = useDispatch()
 
+    const [stripeToken, setStripeToken] = useState(null)
+
     const { totalPrice, totalQty, products } = cart
 
-    const handleCheckout = async () => {
+    const stripeTotal = totalPrice > 300 ? totalPrice - 50 : totalPrice
+
+    useEffect(() => {
         if (!user.currentUser || totalPrice === 0) return // user should be logged in
-        await persistCart(dispatch, user, cart)
+
+        const makeRequest = async () => {
+            try {
+                await processOrder(dispatch, user, cart, {
+                    source: stripeToken.id,
+                    amount: stripeTotal * 100,
+                })
+                return <Navigate to='/success' />
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        stripeToken && makeRequest()
+    }, [stripeToken])
+
+    const onToken = (token) => {
+        setStripeToken(token)
     }
 
     return (
@@ -41,16 +63,22 @@ const Cart = () => {
                             <div>TOTAL PRICE</div>
                             <div>$ {totalPrice}</div>
                             <div>TO PAY</div>
-                            <div>
-                                ${' '}
-                                {totalPrice > 300
-                                    ? totalPrice - 50
-                                    : totalPrice}
-                            </div>
+                            <div>$ {stripeTotal}</div>
                         </div>
-                        <Button onClick={handleCheckout}>
-                            CHECKOUT WITH STRIPE
-                        </Button>
+                        {user.currentUser && (
+                            <StripeCheckout
+                                name='Luga shop'
+                                billingAddress
+                                shippingAddress
+                                description={`your total is $${stripeTotal}`}
+                                total={stripeTotal * 100}
+                                token={onToken}
+                                stripeKey='pk_test_51M4I64JHoH6pbISrJ3wW3dFv1nMZ94en1D2C2XxLyU1PIQuZ3rUqUjSgnX92ULDtpApyqOU3U42Sv6n9R9vhO1cJ000tJyoG4G'
+                            >
+                                <Button>CHECKOUT WITH STRIPE</Button>
+                            </StripeCheckout>
+                        )}
+
                         {!user.currentUser && (
                             <span className='text-xs text-red-500'>
                                 Please login to checkout.

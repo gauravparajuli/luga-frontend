@@ -1,27 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const orderSlice = createSlice({
-    name: 'user',
+    name: 'order',
     initialState: { isProcessing: false, isError: false },
     reducers: {
         processOrderStart: (state) => {
             state.isProcessing = true
+            state.isError = false
         },
-        processOrderSuccess: (state, { payload }) => {
+        processOrderSuccess: (state) => {
             state.isProcessing = false
-            state.currentUser = payload
         },
-        loginFailure: (state) => {
+        processOrderFailure: (state) => {
             state.isProcessing = false
             state.isError = true
-        },
-        logoutUser: (state) => {
-            state.currentUser = null
         },
     },
 })
 
-export const { loginFailure, loginStart, loginSuccess, logoutUser } =
-    userSlice.actions
+export const { processOrderStart, processOrderSuccess, processOrderFailure } =
+    orderSlice.actions
 
-export default userSlice.reducer
+export default orderSlice.reducer
