@@ -44,7 +44,7 @@ const Product = () => {
 
     return (
         <>
-            <Layout>
+            <Layout title={product && product.title}>
                 {product && (
                     <>
                         <h1 className='mb-2 mt-8 text-center'>

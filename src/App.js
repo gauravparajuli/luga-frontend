@@ -10,8 +10,17 @@ import Login from './screens/Login'
 import Signup from './screens/Signup'
 import Cart from './screens/Cart'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from './store/user'
+
+const Logout = () => {
+    const dispatch = useDispatch()
+    dispatch(logoutUser())
+    return <Navigate to='/' />
+}
+
 const App = () => {
-    const user = true
+    const user = useSelector((state) => state.user.currentUser)
     return (
         <Routes>
             <Route index element={<Home />} />
@@ -19,6 +28,7 @@ const App = () => {
                 path='login'
                 element={user ? <Navigate to='/' /> : <Login />}
             />
+            <Route path='logout' element={<Logout />} />
             <Route path='cart' element={<Cart />} />
             <Route
                 path='signup'

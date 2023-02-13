@@ -11,7 +11,7 @@ const ProductList = () => {
     const [sort, setSort] = useState('newest')
 
     return (
-        <Layout title='Products'>
+        <Layout title={category ? category : 'Products'}>
             <h1 className='mb-2 mt-8 text-center'>
                 {category
                     ? `${category.charAt(0).toUpperCase()}${category.slice(1)}`

@@ -12,7 +12,7 @@ const Cart = () => {
     const { totalPrice, totalQty, products } = cart
 
     return (
-        <Layout>
+        <Layout title='Cart'>
             <h1 className='mt-8 text-center'>Cart</h1>
             <h6 className='mb-2 text-center'>{totalQty} Item(s) in Cart.</h6>
             <h5 className=''>

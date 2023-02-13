@@ -1,12 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextBox from '../components/TextBox'
 import Button from '../components/Button'
 import CLink from '../components/CLink'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { loginUser } from '../store/api-calls'
 
 const Login = () => {
     useEffect(() => {
         document.title = 'Login'
     }, [])
+
+    const dispatch = useDispatch()
+    const { isFetching, isError } = useSelector((state) => state.user)
+
+    const [user, setUser] = useState({ email: '', password: '' })
+
+    const updateUser = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
 
     return (
         <div
@@ -18,8 +31,18 @@ const Login = () => {
             <div className='flex flex-col bg-white'>
                 <div className='flex flex-col items-center justify-center bg-white text-lg p-4 gap-4'>
                     <h1 className='text-center'>LOGIN</h1>
-                    <TextBox placeholder='Email' type='text' />
-                    <TextBox placeholder='Password' type='password' />
+                    <TextBox
+                        name='email'
+                        placeholder='Email'
+                        type='text'
+                        onChange={updateUser}
+                    />
+                    <TextBox
+                        name='password'
+                        placeholder='Password'
+                        type='password'
+                        onChange={updateUser}
+                    />
                 </div>
                 <div className='p-4 flex flex-col'>
                     <ul className='mb-2'>
@@ -33,7 +56,17 @@ const Login = () => {
                             <CLink to='/'>{'<<'} Home</CLink>
                         </li>
                     </ul>
-                    <Button>Login</Button>
+                    <Button
+                        onClick={() => loginUser(dispatch, user)}
+                        disabled={isFetching}
+                    >
+                        Login
+                    </Button>
+                    {isError && (
+                        <span className='text-red-500'>
+                            Something went wrong, please try again later
+                        </span>
+                    )}
                 </div>
             </div>
         </div>

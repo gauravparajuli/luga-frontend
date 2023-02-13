@@ -5,9 +5,13 @@ import { Link } from 'react-router-dom'
 import CLink from './CLink'
 import CartIcon from './CartIcon'
 
+import { useSelector, useDispatch } from 'react-redux'
+
 import Annoucement from './Announcement'
 
 const Navbar = () => {
+    const user = useSelector((state) => state.user.currentUser)
+
     return (
         <>
             <Annoucement />
@@ -32,7 +36,9 @@ const Navbar = () => {
                     <div className='flex space-x-4 items-center'>
                         <CLink to='/'>HOME</CLink>
                         <CLink to='/products'>SHOP</CLink>
-                        <CLink to='/login'>SIGN IN</CLink>
+                        <CLink to={user ? '/logout' : '/login'}>
+                            {user ? 'SIGN OUT' : 'SIGN IN'}
+                        </CLink>
                         <Link to='/cart'>
                             <CartIcon />
                         </Link>
