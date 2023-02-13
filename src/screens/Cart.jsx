@@ -4,13 +4,15 @@ import CartItem from '../components/CartItem'
 import CLink from '../components/CLink'
 import StripeCheckout from 'react-stripe-checkout'
 import Button from '../components/Button'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { processOrder } from '../store/api-calls'
 
 const Cart = () => {
     const { cart, user } = useSelector((state) => state)
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -29,7 +31,7 @@ const Cart = () => {
                     source: stripeToken.id,
                     amount: stripeTotal * 100,
                 })
-                return <Navigate to='/success' />
+                return navigate('/success')
             } catch (err) {
                 console.log(err)
             }
