@@ -5,11 +5,16 @@ import Button from '../components/Button'
 import CLink from '../components/CLink'
 
 import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 const Cart = () => {
-    const cart = useSelector((state) => state.cart)
+    const { cart, user } = useSelector((state) => state)
 
     const { totalPrice, totalQty, products } = cart
+
+    const handleCheckout = () => {
+        if (!user.currentUser || totalPrice === 0) return // user should be logged in
+    }
 
     return (
         <Layout title='Cart'>
@@ -24,7 +29,7 @@ const Cart = () => {
                         <CartItem product={x} key={x._id} />
                     ))}
                 </div>
-                <div className='flex justify-center lg:w-[30vw] lg:h-[30vh] min-h-[220px]'>
+                <div className='flex justify-center lg:w-[30vw] lg:h-[30vh] min-h-[230px]'>
                     <div className='bg-white border rounded-xl p-4'>
                         <h2>Order Summary</h2>
                         <div className='grid grid-cols-2 my-4'>
@@ -40,7 +45,14 @@ const Cart = () => {
                                     : totalPrice}
                             </div>
                         </div>
-                        <Button>CHECKOUT WITH STRIPE</Button>
+                        <Button onClick={handleCheckout}>
+                            CHECKOUT WITH STRIPE
+                        </Button>
+                        {!user.currentUser && (
+                            <span className='text-xs text-red-500'>
+                                Please login to checkout.
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
