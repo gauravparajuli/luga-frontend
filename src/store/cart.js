@@ -6,6 +6,8 @@ export const cartSlice = createSlice({
         products: [],
         totalQty: 0,
         totalPrice: 0,
+        isSaving: false,
+        isError: false,
     },
     reducers: {
         addProduct: (state, { payload }) => {
@@ -57,10 +59,30 @@ export const cartSlice = createSlice({
             state.totalQty = 0
             state.totalPrice = 0
         },
+
+        persistCartStart: (state) => {
+            state.isSaving = true
+            state.isError = false
+        },
+
+        persistCartSuccess: (state) => {
+            state.isSaving = false
+        },
+
+        persistCartError: (state) => {
+            state.isError = true
+        },
     },
 })
 
-export const { addProduct, decreaseProductQuantity, removeProduct, resetCart } =
-    cartSlice.actions
+export const {
+    addProduct,
+    decreaseProductQuantity,
+    removeProduct,
+    resetCart,
+    persistCartStart,
+    persistCartError,
+    persistCartSuccess,
+} = cartSlice.actions
 
 export default cartSlice.reducer

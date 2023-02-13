@@ -4,16 +4,19 @@ import CartItem from '../components/CartItem'
 import Button from '../components/Button'
 import CLink from '../components/CLink'
 
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { persistCart } from '../store/api-calls'
 
 const Cart = () => {
     const { cart, user } = useSelector((state) => state)
 
+    const dispatch = useDispatch()
+
     const { totalPrice, totalQty, products } = cart
 
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         if (!user.currentUser || totalPrice === 0) return // user should be logged in
+        await persistCart(dispatch, user, cart)
     }
 
     return (
