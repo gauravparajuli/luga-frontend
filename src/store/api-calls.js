@@ -48,7 +48,6 @@ export const processOrder = async (dispatch, user, cart, order) => {
     try {
         const response = await userRequest(user).post('checkout/payment', order)
         if (response.status === 200) dispatch(processOrderSuccess())
-        dispatch(resetCart())
     } catch (error) {
         console.log(error)
         dispatch(processOrderFailure())
